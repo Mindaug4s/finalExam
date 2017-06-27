@@ -19,6 +19,14 @@ public class ProductAvailabilityTest extends BaseTest {
 	private List<UnavailableProduct> unavailableProducts;
 	private ExplicitWaits waits;
 
+	/**
+	 * @Test - Test checks, if all Products in specific categories (provided by
+	 *       parameter), are available
+	 * @param categoryName
+	 *            - this parameter is read from a data file, and used for
+	 *            further test implementation as the name of the category;
+	 * @throws Exception
+	 */
 	@Test(dataProvider = "ProductCategoriesDataProviderA", dataProviderClass = TestDataProviders.class)
 	public void testIfAllProductsAreAvailable(String categoryName) throws Exception {
 
