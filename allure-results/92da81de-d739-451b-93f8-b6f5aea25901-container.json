@@ -1,0 +1,1 @@
+{"uuid":"92da81de-d739-451b-93f8-b6f5aea25901","name":"exam.MRinkevicius.BaseTest.closeBrowser","description":"","start":1498558738699,"stop":1498558738707,"children":["a23df559-884e-4c1a-87c3-06446084293d"],"afters":[{"name":"closeBrowser","status":"passed","stage":"finished","description":"","start":1498558738699,"stop":1498558738707}]}

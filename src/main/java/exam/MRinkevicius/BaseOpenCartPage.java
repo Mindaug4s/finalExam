@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BaseOpenCartPage {
 	
-	private WebDriver driver;
+	protected WebDriver driver;
 	
 	@FindBy(linkText = "My Account")
 	public WebElement accountManagementButton;

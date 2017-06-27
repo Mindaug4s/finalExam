@@ -7,31 +7,35 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import data.providers.TestDataProviders;
+import explicit.waits.ExplicitWaits;
 import helper.classes.UnavailableProduct;
 
 public class ProductAvailabilityTest extends BaseTest {
 
-	private BaseOpenCartPage basePage;
+	private HomePage homePage;
 	private ProductCatalogImpl productCatalog;
 	private List<String> productList = new ArrayList<String>();
 	private String expectedAvailabilityStatus = "In Stock";
 	private List<UnavailableProduct> unavailableProducts;
+	private ExplicitWaits waits;
 
-	@Test(priority = 0, dataProvider = "ProductCategoriesDataProviderA", dataProviderClass = TestDataProviders.class)
+	@Test(dataProvider = "ProductCategoriesDataProviderA", dataProviderClass = TestDataProviders.class)
 	public void testIfAllProductsAreAvailable(String categoryName) throws Exception {
 
+		waits = new ExplicitWaits(driver);
 		boolean allProductsAvailable = true;
 		boolean isCurrentProductAvailable = true;
 		unavailableProducts = new ArrayList<UnavailableProduct>();
 
-		basePage = new BaseOpenCartPage(driver);
+		homePage = new HomePage(driver);
 		productCatalog = new ProductCatalogImpl(driver);
 
-		basePage.goToProductCategoryByName(categoryName);
+		homePage.goToProductCategoryByName(categoryName);
 		productList = productCatalog.getProductNameList();
 
 		for (String currentProduct : productList) {
 			productCatalog.navigateToProductByName(currentProduct);
+			waits.waitForJavascript();
 			isCurrentProductAvailable = productCatalog.getProductAvailabilityStatus()
 					.contains(expectedAvailabilityStatus);
 
@@ -42,7 +46,7 @@ public class ProductAvailabilityTest extends BaseTest {
 
 			}
 
-			basePage.goToProductCategoryByName(categoryName);
+			homePage.goToProductCategoryByName(categoryName);
 		}
 
 		if (!unavailableProducts.isEmpty()) {
@@ -55,8 +59,6 @@ public class ProductAvailabilityTest extends BaseTest {
 		}
 
 		Assert.assertTrue(allProductsAvailable, "Some products in Category " + categoryName + " is not available");
-
-
 
 	}
 
