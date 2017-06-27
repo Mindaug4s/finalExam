@@ -1,5 +1,6 @@
 package exam.MRinkevicius;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +13,7 @@ public class BaseOpenCartPage {
 	@FindBy(linkText = "My Account")
 	public WebElement accountManagementButton;
 	
-	@FindBy(linkText = "Register")
-	public WebElement registerAccountButton;
+
 
 	public BaseOpenCartPage(WebDriver driver) {
 		this.driver=driver;
@@ -21,15 +21,10 @@ public class BaseOpenCartPage {
 	}
 	
 	
-	public void goToAccountCreationPage(){
-		try{
-			if(registerAccountButton.isDisplayed()){
-				registerAccountButton.click();
-			}
-		}catch (Exception e) {
-			accountManagementButton.click();
-			registerAccountButton.click();
-		}
+	public void goToProductCategoryByName(String categoryName){
+		
+		driver.findElement(By.linkText(categoryName)).click();
+
 	}
 
 }
